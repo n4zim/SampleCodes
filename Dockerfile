@@ -5,5 +5,4 @@ MAINTAINER Nazim Lachter <nlachter@gmail.com>
 COPY . /var/www/
 WORKDIR /var/www/
 
-EXPOSE 9000
-VOLUME /var/www/
+CMD [ "php", "./index.php" ]
