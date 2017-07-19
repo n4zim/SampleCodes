@@ -1,8 +1,5 @@
-FROM php:7.1-fpm
+FROM php:apache
 
 MAINTAINER Nazim Lachter <nlachter@gmail.com>
 
-COPY . /var/www/
-WORKDIR /var/www/
-
-CMD [ "php", "./index.php" ]
+COPY . /var/www/html/
