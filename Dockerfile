@@ -15,7 +15,7 @@ RUN addgroup -g 500 symfony \
 RUN apk add --no-cache --virtual .build-dependencies curl curl-dev icu-dev coreutils
 
 # Adding PHP extensions
-RUN docker-php-ext-install -j$(nproc) curl iconv intl json mbstring opcache pdo_mysql pdo_sqlite zip
+RUN docker-php-ext-install -j$(nproc) curl iconv intl json mbstring opcache pdo_mysql zip
 
 # Adding Composer CLI
 RUN curl -sS https://getcomposer.org/installer | php \
