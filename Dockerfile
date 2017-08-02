@@ -9,9 +9,9 @@ RUN addgroup -g 500 symfony \
  && mkdir /srv/symfony \
  && chown symfony:symfony /srv/symfony
 
-RUN apk add --no-cache --virtual .build-dependencies curl curl-dev icu-dev sqlite-dev coreutils \
- && apk add --no-cache icu git openssh-client \
- && docker-php-ext-install -j$(nproc) curl iconv intl json mbstring opcache pdo_mysql pdo_sqlite zip \
+RUN apk add --no-cache --virtual .build-dependencies curl curl-dev icu-dev sqlite-dev coreutils
+RUN apk add --no-cache icu git openssh-client
+RUN docker-php-ext-install -j$(nproc) curl iconv intl json mbstring opcache pdo_mysql pdo_sqlite zip
 
 RUN curl -sS https://getcomposer.org/installer | php \
  && mv composer.phar /usr/local/bin/composer \
