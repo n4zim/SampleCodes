@@ -2,6 +2,9 @@ FROM php:7.1-fpm-alpine
 
 MAINTAINER Nazim Lachter <nlachter@gmail.com>
 
+# Adding "dockerize" and "gosu"
+RUN apk add dockerize gosu --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/
+
 # Adding new user "symfony"
 RUN addgroup -g 500 symfony \
  && adduser -u 500 -D -G symfony -h /home/symfony -s /bin/sh symfony \
@@ -18,7 +21,7 @@ RUN apk add --no-cache git
 RUN apk add --no-cache libintl icu icu-dev \
  && docker-php-ext-install intl \
  && apk del icu-dev
-RUN docker-php-ext-install opcache
+ && docker-php-ext-install opcache
 
 # PDO & MySQL
 RUN docker-php-ext-install pdo pdo_mysql
