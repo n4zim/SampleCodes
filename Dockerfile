@@ -20,7 +20,7 @@ RUN apk add --no-cache git
 # Fixed Intl version
 RUN apk add --no-cache libintl icu icu-dev \
  && docker-php-ext-install intl \
- && apk del icu-dev
+ && apk del icu-dev \
  && docker-php-ext-install opcache
 
 # PDO & MySQL
