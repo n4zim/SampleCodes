@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "name": "nazim/dockersymfony",
+=======
+    "name": "nazim/dockersymfony2",
+>>>>>>> 684840ab96271e6e7ac47d3fad80a85ce3dc2ad4
     "license": "proprietary",
     "type": "project",
     "autoload": {
