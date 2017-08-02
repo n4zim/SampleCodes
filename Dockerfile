@@ -2,19 +2,19 @@ FROM php:7.1-fpm-alpine
 
 MAINTAINER Nazim Lachter <nlachter@gmail.com>
 
-# Adding "dockerize" and "gosu"
+# Adding packages "dockerize" and "gosu"
 RUN apk add dockerize gosu --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/
 
-# New user "symfony"
+# Adding new user "symfony"
 RUN addgroup -g 500 symfony \
  && adduser -u 500 -D -G symfony -h /home/symfony -s /bin/sh symfony \
  && mkdir /srv/symfony \
  && chown symfony:symfony /srv/symfony
 
-# Adding "curl" and "coreutils"
-RUN apk add --no-cache --virtual .build-dependencies curl coreutils
+# Adding build dependencies
+RUN apk add --no-cache --virtual .build-dependencies curl curl-dev icu-dev coreutils
 
-# PHP extensions
+# Adding PHP extensions
 RUN docker-php-ext-install -j$(nproc) curl iconv intl json mbstring opcache pdo_mysql pdo_sqlite zip
 
 # Adding Composer CLI
