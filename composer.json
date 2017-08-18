@@ -37,13 +37,19 @@
         "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {
-        "symfony-scripts": [
+        "symfony-part1": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
+        ],
+        "symfony-part2": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "symfony-scripts": [
+            "@symfony-part1",
+            "@symfony-part2"
         ],
         "post-install-cmd": [],
         "post-update-cmd": []
