@@ -26,4 +26,4 @@ RUN gosu www-data composer install --optimize-autoloader --prefer-dist --no-inte
 
 # -------------------------------------------------------------------
 
-ENTRYPOINT [ "$WORKDIR/entrypoint.sh", "docker-php-entrypoint" ]
+ENTRYPOINT [ "${WORKDIR}/entrypoint.sh", "docker-php-entrypoint" ]
