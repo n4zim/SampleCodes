@@ -1,49 +1,48 @@
-FROM php:7.1-fpm-alpine
+FROM n4zim/php-projects:symfony-fpm-advanced
 
 MAINTAINER Nazim Lachter <nlachter@gmail.com>
 
-# Adding "dockerize" and "gosu"
-RUN apk add dockerize gosu --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/
+# -------------------------------------------------------------------
 
-# Adding new user "symfony"
-RUN addgroup -g 500 symfony \
- && adduser -u 500 -D -G symfony -h /home/symfony -s /bin/sh symfony \
- && mkdir /srv/symfony \
- && chown symfony:symfony /srv/symfony
+ARG DATABASE_HOST
+ENV DATABASE_HOST=${DATABASE_HOST}
+ARG DATABASE_PORT
+ENV DATABASE_PORT=${DATABASE_PORT}
+ARG DATABASE_NAME
+ENV DATABASE_NAME=${DATABASE_NAME}
+ARG DATABASE_USER
+ENV DATABASE_USER=${DATABASE_USER}
+ARG DATABASE_PASSWORD
+ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
+ARG SECRET
+ENV SECRET=${SECRET}
 
-# Update repository
-RUN set -xe apk update apk upgrade
+# -------------------------------------------------------------------
 
-# Git (for Composer)
-RUN apk add --no-cache git
+ARG WORKDIR
+WORKDIR $WORKDIR
+COPY . .
+RUN chown www-data:www-data -R .
 
-# Fixed Intl version
-RUN apk add --no-cache libintl icu icu-dev \
- && docker-php-ext-install intl \
- && apk del icu-dev \
- && docker-php-ext-install opcache
+# -------------------------------------------------------------------
 
-# PDO & MySQL
-RUN docker-php-ext-install pdo pdo_mysql
+RUN gosu www-data composer install --optimize-autoloader --prefer-dist --no-interaction --verbose
 
-# Adding Composer CLI
-RUN curl -sS https://getcomposer.org/installer | php \
- && mv composer.phar /usr/local/bin/composer
+# Bower install
+#RUN gosu www-data bower install --production --allow-root
 
-# Adding Symfony CLI
-RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony \
- && chmod a+x /usr/local/bin/symfony
+# Develoment assets (No Interaction, Full verbose) 
+#RUN gosu www-data php bin/console assetic:dump -n -vvv \
+#	  > /var/log/zei-assets-dev.log 
 
-# Cleaning
-RUN rm -rf /tmp/* /var/cache/apk/*
-
-# Entrypoint
-ADD entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod 0755 /usr/local/bin/entrypoint.sh
-
-# Home permissions
-RUN chown symfony:symfony -R /home/symfony
-
-WORKDIR /srv/symfony
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["/bin/sh"]
+# Production assets (No Interaction, No debug mode, Production, Full verbose) 
+#RUN gosu www-data php bin/console assetic:dump -n --no-debug -e prod -vvv \
+#	  > /var/log/zei-assets-prod.log 
+ 
+# Database Update (Force, No Interation, No Debug, Full verbose) 
+#RUN gosu www-data php bin/console doctrine:schema:update -f -n --no-debug -vvv \
+#	  > /var/log/zei-database.log 
+ 
+# Cache clear (No Interaction, No debug mode, No cache warm up, Production, Full verbose) 
+#RUN gosu www-data php bin/console cache:clear -n --no-debug --no-warmup -e prod -vvv \
+#	  > /var/log/zei-cache.log 
