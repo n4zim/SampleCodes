@@ -4,6 +4,9 @@ MAINTAINER Nazim Lachter <nlachter@gmail.com>
 
 # -------------------------------------------------------------------
 
+RUN echo "dir : $WORKDIR"
+RUN echo "dir : ${WORKDIR}"
+
 ARG WORKDIR
 ENV WORKDIR=$WORKDIR
 WORKDIR $WORKDIR
