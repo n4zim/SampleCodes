@@ -1,19 +1,22 @@
 #!/bin/sh
 
-if [[ ! -d "/srv/symfony/var" ]]; then
-	gosu symfony mkdir /srv/symfony/var
-fi
+if [ -z "$WORKDIR" ]
+  then
+    
+    echo "NO $WORKDIR ENV VAR !"
+  
+  else
+	
+	cd $WORKDIR
+	
+	if [[ ! -d "var" ]]; then gosu www-data mkdir var; fi
+	
+	if [[ -d "var/cache" ]]; then rm -rf var/cache/*; fi
+	
+	gosu www-data composer run-script symfony-scripts --no-interaction --verbose
+	
+	gosu www-data php bin/console doctrine:schema:update --force
 
-if [[ -d "/srv/symfony/var/cache/" ]]; then
-  rm -rf /srv/symfony/var/cache/*
-fi
-
-if [[ -d "/srv/symfony/app/cache/" ]]; then
-  rm -rf /srv/symfony/app/cache/*
-fi
-
-if [[ -d "app/DoctrineMigrations/" ]] && [[ $1 == "/bin/sh" ]]; then
-  gosu symfony php bin/console doctrine:migrations:migrate --no-interaction
 fi
 
 exec "$@"
