@@ -4,9 +4,7 @@ MAINTAINER Nazim Lachter <nlachter@gmail.com>
 
 # -------------------------------------------------------------------
 
-RUN echo "dir : $(echo $WORKDIR)"
-
-ARG WORKDIR
+ARG WORKDIR=/srv/symfony
 ENV WORKDIR=$WORKDIR
 WORKDIR $WORKDIR
 
