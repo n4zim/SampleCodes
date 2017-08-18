@@ -5,7 +5,9 @@ MAINTAINER Nazim Lachter <nlachter@gmail.com>
 # -------------------------------------------------------------------
 
 ARG WORKDIR
+ENV WORKDIR=$WORKDIR
 WORKDIR $WORKDIR
+
 COPY . .
 RUN chown www-data:www-data -R .
 
