@@ -27,5 +27,5 @@ RUN gosu www-data php bin/console assetic:dump -n --no-debug -e prod -vvv ; exit
 
 # -------------------------------------------------------------------
 
-COPY entrypoint.sh /usr/local/bin/docker-symfony-entrypoint.sh
+COPY docker-symfony-entrypoint.sh /usr/local/bin/
 ENTRYPOINT [ "docker-symfony-entrypoint", "docker-php-entrypoint" ]
