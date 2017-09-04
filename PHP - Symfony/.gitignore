@@ -1,3 +1,5 @@
+/composer.lock
+
 # Symfony
 /.web-server-pid
 /app/config/parameters.yml
