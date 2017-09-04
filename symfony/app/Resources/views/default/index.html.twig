@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Test App with</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
+            </div>
+
+            <div id="status">
+                    <p>Your IP address : {{ ip }}</p>
+                    <p>Timestamp session : {{ timestamp }}</p>
+                    <p>PHP version : {{ version }}</p>
+                    <p>HTTP host : {{ host }}</p>
+                    <p>Server name : {{ name }}</p>
+                    <p>Server software : {{ software }}</p>
+                    <p>Server address : {{ server }}</p>
+                    <p>Remote address : {{ remote }}</p>
+                    <p>Server user : {{ user }}</p>
+                    <p>Script filename : {{ script }}</p>
+                    <p>Request time : {{ time }}</p>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+    h1 { line-height: 1.2; margin: 0 0 .5em; font-size: 36px; }
+    p { margin: 0 0 0.7em 0; }
+    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+    #container { padding: 2em; }
+    #welcome h1 span { display: block; font-size: 75%; }
+    @media (min-width: 768px) {
+        #wrapper { width: 80%; margin: 2em auto; }
+        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+    }
+</style>
+{% endblock %}
