@@ -28,4 +28,4 @@ RUN gosu www-data [ -f bower.json ] && bower install --production ; exit 0
 # -------------------------------------------------------------------
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-symfony-entrypoint
-ENTRYPOINT [ "docker-symfony-entrypoint", "docker-php-entrypoint", "/bin/bash" ]
+ENTRYPOINT [ "docker-symfony-entrypoint", "docker-php-entrypoint", "sh" ]

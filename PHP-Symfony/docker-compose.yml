@@ -18,3 +18,14 @@ services:
       context: .
     volumes:
       - /srv/symfony
+    environment:
+      - DATABASE_HOST=localhost
+      - DATABASE_PORT=null
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=root
+      - DATABASE_NAME=tests
+      - MAILER_TRANSPORT=mailer
+      - MAILER_HOST=null
+      - MAILER_USER=null
+      - MAILER_PASSWORD=null
+      - SECRET=ThisSecretIsNotSecretAnymore
