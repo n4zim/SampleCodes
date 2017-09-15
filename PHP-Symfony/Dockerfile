@@ -17,7 +17,7 @@ RUN chown www-data:www-data -R .
 RUN gosu www-data composer install --optimize-autoloader --prefer-dist --no-interaction --verbose
 
 # Bower install
-RUN gosu www-data [ -f bower.json ] && bower install --production
+RUN gosu www-data if [ -f bower.json ]; then bower install --production; else echo "No bower.json"; fi
 
 # -------------------------------------------------------------------
 
