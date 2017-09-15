@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;Go - Iris&gt;">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Go/src/github.com" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Go/src/github.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
