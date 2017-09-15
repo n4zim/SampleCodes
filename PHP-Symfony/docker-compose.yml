@@ -1,0 +1,20 @@
+version: "2"
+services:
+
+  nginx:
+    image: 'nginx:latest'
+    links:
+      - 'php:FPM-SERVICE'
+    ports:
+      - '80:80'
+    volumes:
+      - /srv/symfony
+      - '.config/vhost.conf:/etc/nginx/conf.d/default.conf:ro'
+    volumes_from:
+      - php
+
+  php:
+    build:
+      context: .
+    volumes:
+      - /srv/symfony
