@@ -17,13 +17,7 @@ RUN chown www-data:www-data -R .
 RUN gosu www-data composer install --optimize-autoloader --prefer-dist --no-interaction --verbose
 
 # Bower install
-RUN gosu www-data [ -f bower.json ] && bower install --production ; exit 0
-
-# Develoment assets (No Interaction, Full verbose) 
-#RUN gosu www-data php bin/console assetic:dump -n -vvv ; exit 0
-
-# Production assets (No Interaction, No debug mode, Production, Full verbose) 
-#RUN gosu www-data php bin/console assetic:dump -n --no-debug -e prod -vvv ; exit 0
+RUN gosu www-data [ -f bower.json ] && bower install --production
 
 # -------------------------------------------------------------------
 
