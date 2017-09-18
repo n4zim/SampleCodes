@@ -9,13 +9,13 @@ services:
       - '80:80'
     volumes:
       - /srv/symfony
-      - '.config/vhost.conf:/etc/nginx/conf.d/default.conf:ro'
+      - './vhost.conf:/etc/nginx/conf.d/default.conf:ro'
     volumes_from:
       - php
 
   php:
     build:
-      context: .
+      context: ..
       args:
         - WORKDIR=/srv/symfony
     volumes:
