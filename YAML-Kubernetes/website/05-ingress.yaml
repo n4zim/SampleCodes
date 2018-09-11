@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: website
+  name: production-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: production # A static IP must exist with this name
+  labels:
+    app: production
+spec:
+  backend:
+    serviceName: production-backend
+    servicePort: 80
+  tls:
+    - secretName: production-website-nlachter-tls
+      hosts:
+        - main-endpoint-website-k8s.nlachter.fr
+        - second-endpoint-website-k8s.nlachter.fr

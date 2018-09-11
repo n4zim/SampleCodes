@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: website
+  name: production-deployment
+  labels:
+    app: production
+spec:
+  selector:
+    matchLabels:
+      app: production
+  template:
+    metadata:
+      labels:
+        app: production
+    spec:
+      containers:
+        - name: production-container
+          image: dockercloud/hello-world:latest
+          ports:
+            - containerPort: 80
