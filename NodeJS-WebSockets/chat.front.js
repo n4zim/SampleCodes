@@ -13,7 +13,7 @@ $(function() {
 
   window.WebSocket = window.WebSocket || window.MozWebSocket
   if(!window.WebSocket) {
-    content.html($('<p>', { text:'Your browser doesn\'t support WebSocket' }))
+    content.text('Your browser doesn\'t support WebSocket')
     input.hide()
     $('span').hide()
     return
