@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: backyard
+  name: website-backend
+  labels:
+    app: backyard
+spec:
+  type: NodePort
+  selector:
+    app: backyard
+  ports:
+    - port: 80
+      targetPort: 80

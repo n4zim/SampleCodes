@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  namespace: backyard
+  name: website
+  labels:
+    app: backyard
+spec:
+  selector:
+    matchLabels:
+      app: backyard
+  template:
+    metadata:
+      labels:
+        app: backyard
+    spec:
+      containers:
+        - name: website-container
+          image: dockercloud/hello-world:latest
+          ports:
+            - containerPort: 80

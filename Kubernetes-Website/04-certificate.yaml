@@ -1,0 +1,20 @@
+kind: Certificate
+apiVersion: certmanager.k8s.io/v1alpha1
+metadata:
+  namespace: backyard
+  name: website-nlachter-tls
+spec:
+  secretName: website-nlachter-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: "*.backyard.nlachter.fr"
+  dnsNames:
+    - backyard.nlachter.fr
+  acme:
+    config:
+      - http01:
+          ingress: website-ingress
+        domains:
+          - "*.backyard.nlachter.fr"
+          - backyard.nlachter.fr
