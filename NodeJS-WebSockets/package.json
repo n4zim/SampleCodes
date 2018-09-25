@@ -1,0 +1,9 @@
+{
+  "name": "nodejs-websockets",
+  "version": "1.0.0",
+  "author": "Nazim Lachter",
+  "dependencies": {
+    "websocket": "^1.0.26"
+  },
+  "devDependencies": {}
+}
