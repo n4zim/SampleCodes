@@ -14,7 +14,7 @@ spec:
   acme:
     config:
       - http01:
-          ingress: website-ingress
+          ingress: website
         domains:
           - "*.backyard.nlachter.fr"
           - backyard.nlachter.fr

@@ -1,0 +1,28 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  namespace: backyard
+  name: website
+  annotations:
+    # ------ IF GCE ------
+    #kubernetes.io/ingress.class: gce
+    #kubernetes.io/ingress.global-static-ip-name: backyard # A static IP must exist with this name
+    #ingress.kubernetes.io/ssl-passthrough: "true"
+    # ------ IF NGINX ------
+    kubernetes.io/ingress.class: nginx
+spec:
+
+  # Add this AFTER the first WORKING launch
+  tls:
+    - secretName: website-nlachter-tls
+      hosts:
+        - website.backyard.nlachter.fr
+  # ------
+
+  rules:
+    - host: website.backyard.nlachter.fr
+      http:
+        paths:
+          - backend:
+              serviceName: website
+              servicePort: 80
